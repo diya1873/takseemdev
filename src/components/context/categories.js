@@ -22,7 +22,7 @@ export function CategoriesProvider({ children }) {
     const fetchCategoriesData = async () => {
       console.log("categoriesDatawdawd",categoriesData)
       try {
-        const resturantId = typeof window !== 'undefined' ?window.localStorage.getItem('menuResturantId'): null;
+        const resturantId = window.localStorage.getItem('menuResturantId');
         const response = await axios.get(`http://192.168.1.121:3030/category/list/${resturantId}`);
         if (response.status === 200) {
             setCategoriesData(response.data);

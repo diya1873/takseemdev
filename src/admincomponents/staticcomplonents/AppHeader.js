@@ -47,8 +47,7 @@ const AppHeader = () => {
     role: "admin",
   };
 
-  const token = typeof window !== 'undefined' ? window.localStorage.getItem("token") : null;
-
+  const token=window.localStorage.getItem("token")
 
   const {
     isCollabsled,
@@ -63,8 +62,8 @@ const AppHeader = () => {
     setIClosed(!isClosed);
   };
 
-  const menuTableId=typeof window !== 'undefined' ? window.localStorage.getItem("menuTableId"): null;
-  const menuResturantId=typeof window !== 'undefined' ? window.localStorage.getItem("restaurantId"): null;
+  const menuTableId=0
+  const menuResturantId=window.localStorage.getItem("restaurantId")
   return (
     <AppBar position="" color="error" enableColorOnDark>
       <CHeader className="mb-1 Cheader">

@@ -16,7 +16,7 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
       try {
         // Fetch token from local storage
-        const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+        const token = localStorage.getItem('token');
 
         // Create headers with the token
         const headers = {

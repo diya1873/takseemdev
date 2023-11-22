@@ -6,11 +6,12 @@ import { Card, Button, Modal, Form, Dropdown } from 'react-bootstrap';
 import './slider.css';
 import Dropzone from 'react-dropzone';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 const App = () => {
   const [images, setImages] = useState([]);
-  const restaurantId =  typeof window !== 'undefined' ?localStorage.getItem('restaurantId'): null;
-  const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+  const restaurantId = localStorage.getItem('restaurantId');
+  const token = localStorage.getItem('token');
 
   const [showModal, setShowModal] = useState(false);
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
@@ -134,7 +135,7 @@ const App = () => {
 
   const deleteSlider = () => {
     if (sliderToDelete) {
-      const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;// Get the token from localStorage
+      const token = localStorage.getItem('token'); // Get the token from localStorage
       const requestBody = {
         token: token,
       };
@@ -172,7 +173,16 @@ const App = () => {
       <div className="card-container">
         {images.map((image) => (
           <Card key={image.id} className="image-card">
-            <Card.Img variant="top" src={image.img} alt={image.alt} />
+          <Image
+          src={image.img}
+          alt={image.alt}
+          width={150} // Specify the width you want
+          height={300} // Fixed height for all images
+          layout="responsive"
+          objectFit="cover"
+          objectPosition="center"
+          priority
+        />
             <Card.Body>
               <Button
                 className="delete-button"

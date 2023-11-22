@@ -15,8 +15,8 @@ export function CartProvider({ children }) {
     const fetchCartDta = async () => {
       try {
 
-        const resturantId = typeof window !== 'undefined' ?window.localStorage.getItem('menuResturantId'): null;
-        const menuTableId = typeof window !== 'undefined' ?window.localStorage.getItem('menuTableId'): null;
+        const resturantId = window.localStorage.getItem('menuResturantId');
+        const menuTableId = window.localStorage.getItem('menuTableId');
         
         const response = await axios.get(`http://192.168.1.121:3030/cart/cart-details?restaurantId=${resturantId}&tableId=${menuTableId}`);
         if (response.status === 200) {

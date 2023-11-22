@@ -1,13 +1,14 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
 import './search.css'; // Import the CSS file
 import Link from 'next/link';
 import { useProductsData } from '../../../components/context/products';
 import { useRouter } from 'next/navigation';
-export default function Search() {
+import Image from 'next/image';
 
-  const router=useRouter()
+export default function Search() {
+  const router = useRouter();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState(null);
@@ -25,13 +26,14 @@ export default function Search() {
   }, []);
 
   const handleSearch = async () => {
+    const menuResturantId = localStorage.getItem('menuResturantId');
     try {
       const apiUrl = 'http://192.168.1.121:3030/search/list/';
 
       // Construct the request body as a JSON object
       const requestBody = {
         query: searchQuery,
-        restaurantId: 1,
+        restaurantId: menuResturantId,
       };
 
       const response = await fetch(apiUrl, {
@@ -48,7 +50,7 @@ export default function Search() {
 
       const data = await response.json();
 
-      if (data.categories.length === 0) {
+      if (data.categories.length === 0 && data.products.length === 0) {
         // No results found for the search query
         setError('No results found.');
         setSearchResults(null);
@@ -66,81 +68,110 @@ export default function Search() {
       console.error('Error fetching search results:', error);
     }
   };
+
   const { setCategoryId } = useProductsData();
+
   const handleFilterProducts = (id) => {
-    router.push(`/resturant/`)
+    router.push(`/resturant/`);
     setCategoryId(id);
-  }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
-    <div className='container searchcontainer' >
-      
+    <div className="container searchcontainer">
       <div className="input-box">
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search here..."
-      />
-      <button onClick={handleSearch} disabled={!searchQuery} className="button">
-        Search
-      </button>
-    </div>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="Search here..."
+        />
+        <button onClick={handleSearch} disabled={!searchQuery} className="button">
+          Search
+        </button>
+      </div>
 
       {error && <p>{error}</p>}
 
-      {searchResults && searchResults.categories.length > 0 && (
-        <div className="category  ">
-        <h2 style={{marginLeft:'50px'}}>Category</h2>
-        
-          <img src={searchResults.categories[0].img} alt={searchResults.categories[0].name} onClick={()=>handleFilterProducts(searchResults.categories[0].id)} />
-          <h5>{searchResults.categories[0].name}</h5>
-        
-        </div>
-        
-      )}
-      <hr style={{color:'gray'}}></hr>
-      {searchResults && searchResults.products.length > 0 && (
+      {searchResults && (
         <div>
-        <h2 style={{marginLeft:'50px'}}>Products</h2>
-          {searchResults.products.map((product,index) => (
-             <Link key={index} className="text-decoration-none" href={`/resturant/${product.id}`}>
-            <div className="card mt-3 m-4 " key={product.id}>
-              <div className=" ">
-                <span className="float-end " >
-                  <img
-                    src={product.img}
-                    alt={product.name}
-                    width={`100`}
-                    height={`100`}
-                   
+          {searchResults.categories.length > 0 && (
+            <div className="category">
+              <h2 style={{ marginLeft: '50px' }}>Categories</h2>
+              {searchResults.categories.map((category, index) => (
+                <div key={index}>
+                  <Image
+                    src={category.img}
+                    alt={category.name}
+                    width={100}
+                    height={100}
+                    layout="responsive"
+                    objectFit="cover"
+                    objectPosition="center"
+                    onClick={() => handleFilterProducts(category.id)}
                   />
-                </span>
-                <span className="ms-2 row ">
-                  <div className="row ">
-                    <div className="col ">
-                      <h6 className="p-2">{product.name.slice(0, 25)}</h6>
-                      <small>
-                        {product.description.length > 50 ? (
-                          <>{product.description.slice(0, 50)}...</>
-                        ) : (
-                          product.description
-                        )}
-                      </small>
-                     
-                      {product.price!==0?(
-                        <span className="float-end text-dark mt-2 mb-1">
-                          {product.price} <b className="text-danger"> Jod</b>
-                        </span>):(<> <span className="float-end text-danger mt-2 mb-1 text-danger">
-               Price On Selection
-                        </span></>)
-                      }
+                  <h5>{category.name}</h5>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <hr style={{ color: 'gray' }}></hr>
+
+          {searchResults.products.length > 0 && (
+            <div>
+              <h2 style={{ marginLeft: '50px' }}>Products</h2>
+              {searchResults.products.map((product, index) => (
+                <Link key={index} className="text-decoration-none" href={`/resturant/${product.id}`}>
+                  <div className="card mt-3 m-4 " key={product.id}>
+                    <div className=" ">
+                      <span style={{ width: '25%' }} className="float-end ">
+                        <Image
+                          src={product.img}
+                          alt={product.name}
+                          width={100}
+                          height={100}
+                          layout="responsive"
+                        />
+                      </span>
+                      <span className="ms-2 row ">
+                        <div className="row ">
+                          <div className="col ">
+                            <h6 className="p-2">{product.name.slice(0, 25)}</h6>
+                            <small>
+                              {product.description.length > 50 ? (
+                                <>{product.description.slice(0, 50)}...</>
+                              ) : (
+                                product.description
+                              )}
+                            </small>
+
+                            {product.price !== 0 ? (
+                              <span className="float-end text-dark mt-2 mb-1">
+                                {product.price} <b className="text-danger"> Jod</b>
+                              </span>
+                            ) : (
+                              <>
+                                <span className="float-end text-danger mt-2 mb-1 text-danger">
+                                  Price On Selection
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </span>
                     </div>
                   </div>
-                </span>
-              </div>
+                </Link>
+              ))}
             </div>
-          </Link>
-          ))}
+          )}
         </div>
       )}
     </div>

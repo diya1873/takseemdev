@@ -30,7 +30,7 @@ function EditProductForm(props) {
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
 
   useEffect(() => {
-    const restaurantId =  typeof window !== 'undefined' ?localStorage.getItem('restaurantId'): null;
+    const restaurantId = localStorage.getItem('restaurantId');
     // Fetch categories from the API
     axios
       .get(`http://192.168.1.121:3030/category/list/${restaurantId}`)
@@ -121,7 +121,7 @@ function EditProductForm(props) {
   };
 
   const handleSubmit = () => {
-    const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+    const token = localStorage.getItem('token');
     // Prepare the product data for the API request
     const productData = {
       name: product.productName,
@@ -340,7 +340,9 @@ function EditProductForm(props) {
             </div>
           </Form.Group>
 
-          <Form.Group>
+          {/* aditional image */}
+         {/* 
+         <Form.Group>
             <Form.Label className="form-label">Additional Images</Form.Label>
             <div className="dropzone">
               <Dropzone onDrop={onDropAdditionalImages} multiple>
@@ -370,6 +372,8 @@ function EditProductForm(props) {
               </Dropzone>
             </div>
           </Form.Group>
+        
+        */}
         </Col>
 
         <Button variant="danger" onClick={handleSubmit}>

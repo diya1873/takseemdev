@@ -1,4 +1,4 @@
-"use client"
+"use Client"
 import React from 'react'
 import {
   CAvatar,
@@ -34,8 +34,8 @@ const router=useRouter()
 const { isCollabsled, setIsCollabsled, isClosed,
   setIClosed, setIsUserLogedIn,isUserLogedIn} = useSideBarContext();
   const handleLogout=()=>{
-    typeof window !== 'undefined' ?window.localStorage.removeItem("token"): null;
-    typeof window !== 'undefined' ? window.localStorage.removeItem("restaurantId"): null;
+   window.localStorage.removeItem("token")
+   window.localStorage.removeItem("restaurantId")
 router.push('/admin')
 toast.success("loged out")
 setIsUserLogedIn(false)

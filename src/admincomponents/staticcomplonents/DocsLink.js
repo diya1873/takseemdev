@@ -1,4 +1,3 @@
-"use client"
 import PropTypes from 'prop-types'
 import React from 'react'
 import { CLink } from '@coreui/react'

@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Row, Col, Modal, Form, Container, FormControl, Image } from 'react-bootstrap';
+import { Card, Button, Row, Col, Modal, Form, Container, FormControl } from 'react-bootstrap';
+import Image from 'next/image';
 import axios from 'axios';
 import { AiFillCloseCircle, AiOutlineCloudUpload } from 'react-icons/ai';
 import Dropzone from 'react-dropzone';
@@ -14,7 +15,7 @@ const FileDropZone = ({ onDrop, categoryImage, onDelete }) => {
             <input {...getInputProps()} />
             {categoryImage ? (
               <div>
-                <Image alt='icon' src={categoryImage} roundedCircle className="image-preview" style={{ width: '100px', height: '100px' }} />
+                <Image width={100} height={100} alt='icon' src={categoryImage} roundedCircle className="image-preview" style={{ width: '100px', height: '100px' }} />
                 <Button variant="danger" size="sm" className="mt-2" onClick={onDelete}>
                   Delete 
                 </Button>
@@ -40,8 +41,8 @@ const Categories = () => {
   const [editCategory, setEditCategory] = useState(null);
 
   useEffect(() => {
-    const restaurantId =  typeof window !== 'undefined' ?window.localStorage.getItem('restaurantId'): null;
-    const token =  typeof window !== 'undefined' ?window.localStorage.getItem('token'): null;
+    const restaurantId = window.localStorage.getItem('restaurantId');
+    const token = window.localStorage.getItem('token');
 
     axios
       .get(`http://192.168.1.121:3030/category/list/${restaurantId}`, {
@@ -58,7 +59,7 @@ const Categories = () => {
   }, []);
 
   const handleDeleteCategory = (categoryId) => {
-    const token =  typeof window !== 'undefined' ?window.localStorage.getItem('token'): null;
+    const token = window.localStorage.getItem('token');
 
     axios
       .delete(`http://192.168.1.121:3030/category/delete/${categoryId}`, {
@@ -105,9 +106,9 @@ const Categories = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (categoryName && categoryImage) {
-      const token =  typeof window !== 'undefined' ?window.localStorage.getItem('token'): null;
+      const token = window.localStorage.getItem('token');
       const data = new FormData();
-      data.append('restaurantId', '6');
+      data.append('restaurantId', '1');
       data.append('name', categoryName);
 
       // Append the image as binary data
@@ -134,7 +135,7 @@ const Categories = () => {
 
   const handleUpdateCategory = () => {
     if (editCategory && categoryName && categoryImage) {
-      const token =  typeof window !== 'undefined' ?window.localStorage.getItem('token'): null;
+      const token = window.localStorage.getItem('token');
       const data = new FormData();
       data.append('restaurantId', '6');
       data.append('id', editCategory.id);
@@ -194,12 +195,19 @@ const Categories = () => {
         {categories.map((category, index) => (
           <Col key={index} lg={3} md={6} sm={6}>
             <div style={{ textAlign: 'center', marginBottom: '10px' }}></div>
-            <Card style={{ borderRadius: '25px' }}>
-              <Card.Img
-                style={{ width: '90%', margin: '10px auto', maxHeight:"300px !important", minHeight:'300px !important' }}
-                variant="top"
-                src={category.img}
-              />
+            <Card style={{ borderRadius: '25px' }} className="image-card">
+            <Image
+            className='card-img-top'
+            src={category.img}
+            alt="Category Image"
+            width={90} // Specify the width you want
+            height={300}      // Specify the height you want
+            layout="responsive" // Use "responsive" layout for flexible sizing
+            objectFit="cover" // Use "cover" for responsive layout
+            objectPosition="center" // Adjust as needed
+            priority
+            style={{ width: '90% !important', margin: '0 auto', borderRadius: '25px',  }}
+          />
               <Card.Body style={{ textAlign: 'center' }}>
                 <Card.Text> <b>{category.name}</b></Card.Text>
                 <Card.Text>Total Products: 5</Card.Text>

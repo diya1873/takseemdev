@@ -21,6 +21,7 @@
     transition: transform 0.2s;
     width: 18rem;
     cursor: pointer;
+    
   }
   
   .image-card:hover {
@@ -29,7 +30,8 @@
   
   .image-card img {
     max-width: 100%;
-    height: 300px;
+    max-height: 200px !important;
+    min-height: 200px !important;
     border-radius: 5px 5px 0 0;
   }
   

@@ -14,7 +14,7 @@ export function MenuProvider({ children }) {
       try {
 
 
-        const resturantId = typeof window !== 'undefined' ?window.localStorage.getItem('menuResturantId'): null;
+        const resturantId = window.localStorage.getItem('menuResturantId');
 
         const response = await axios.get(`http://192.168.1.121:3030/slider/list/${resturantId}`);
         if (response.status === 200) {

@@ -12,7 +12,7 @@ export function SideBarProvider({ children }) {
     const [isUserLogedIn,setIsUserLogedIn]=useState(false)
 
     useEffect(()=>{
-        const token=typeof window !== 'undefined' ?window.localStorage.getItem("token"): null;
+        const token=window.localStorage.getItem("token")
         if(!token){
           setIsUserLogedIn(false)
         }else{
@@ -20,7 +20,6 @@ export function SideBarProvider({ children }) {
         }
       },[isUserLogedIn])
   return (
-    
     <SideBarContext.Provider value={{ isCollabsled,
      setIsCollabsled ,isClosed,setIClosed,setIsUserLogedIn,isUserLogedIn}}>
       {children}

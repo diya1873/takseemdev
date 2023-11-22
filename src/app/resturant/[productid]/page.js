@@ -1,6 +1,4 @@
-
 "use client";
-
 
 import React, { useEffect, useState } from "react";
 import styles from './productid.css';
@@ -12,22 +10,17 @@ import Hero from "../../../components/Hero/Hero";
 import axios from "axios";
 import Link from "next/link";
 import { toast } from 'react-toastify';
-
-
-
-
-
-
 import { useCartData } from "../../../components/context/cart";
-
+import css from './productid.css';
 export default function Page(props) {
   const [isTextareaVisible, setTextareaVisible] = useState(true);
   const [products, setProducts] = useState(null);
   const [variations, setVariations] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
-  const [textareaValue, setTextareaValue] = useState(''); // State variable to hold textarea value
+  const [textareaValue, setTextareaValue] = useState('');
   const id = props.params.productid;
+  const { setIsChanged, isChanged } = useCartData();
 
   const fetchProducts = async () => {
     try {
@@ -42,7 +35,7 @@ export default function Page(props) {
     }
   }
 
-  const fetchvariations = async () => {
+  const fetchVariations = async () => {
     try {
       const response = await axios.get(`http://192.168.1.121:3030/product/variations/${id}`);
       if (response.status === 200) {
@@ -57,12 +50,11 @@ export default function Page(props) {
 
   useEffect(() => {
     fetchProducts();
-    fetchvariations();
+    fetchVariations();
   }, []);
 
   const calculateTotal = () => {
     let total = parseFloat(products?.price) || 0;
-  
     variations?.forEach((variation) => {
       if (variation.type === "radio") {
         const selectedOption = selectedOptions[variation.title];
@@ -77,12 +69,10 @@ export default function Page(props) {
         });
       }
     });
-  
-    return (total * quantity).toFixed(2); // Format to two decimal places
+    return (total * quantity).toFixed(2);
   };
+
   const handleRadioChange = (variationTitle, option) => {
-    console.log("id", option.id)
-    console.log("variationId", option.variationId)
     setSelectedOptions((prevSelectedOptions) => ({
       ...prevSelectedOptions,
       [variationTitle]: option,
@@ -91,13 +81,8 @@ export default function Page(props) {
 
   const handleCheckboxChange = (optionId) => {
     setSelectedOptions((prevSelectedOptions) => {
-     
-      // Create a copy of the previous selected options
       const updatedOptions = { ...prevSelectedOptions };
-  
-      // Toggle the value for the given optionId
       updatedOptions[optionId] = !updatedOptions[optionId];
-  
       return updatedOptions;
     });
   };
@@ -108,110 +93,104 @@ export default function Page(props) {
 
   const handleTextareaChange = (event) => {
     setTextareaValue(event.target.value);
-   
   };
 
-{/* add to cart function */}
-const {setIsChanged,isChanged}=useCartData()
+  const handleAddToCart = async () => {
+    try {
+      const selectedVariations = [];
+      const hasRadioOptions = variations.some((variation) => variation.type === "radio");
 
+      if (hasRadioOptions) {
+        let radioOptionSelected = false;
+        variations?.forEach((variation) => {
+          if (variation.type === "radio" && selectedOptions[variation.title]) {
+            const variationData = {
+              variationId: variation?.id,
+              optionId: selectedOptions[variation?.title].id,
+            };
+            selectedVariations.push(variationData);
+            radioOptionSelected = true;
+          }
+        });
 
-const handleAddToCart = async () => {
-  
-  try {
-    const selectedVariations = [];
-    // Check if there are any radio options
-    const hasRadioOptions = variations.some(
-      (variation) => variation.type === "radio"
-    );
+        if (!radioOptionSelected) {
+          console.error('Please select at least one radio option');
+          toast.error('Please select at least one radio option');
+          return;
+        }
+      }
 
-    if (hasRadioOptions) {
-      // Handle radio options
-      let radioOptionSelected = false;
       variations?.forEach((variation) => {
-        if (variation.type === "radio" && selectedOptions[variation.title]) {
-          const variationData = {
-            variationId: variation?.id,
-            optionId: selectedOptions[variation?.title].id,
-          };
-          selectedVariations.push(variationData);
-          radioOptionSelected = true;
+        if (variation.type === "multi") {
+          variation.VariationOptions.forEach((option) => {
+            if (selectedOptions[option?.id]) {
+              const variationData = {
+                variationId: variation?.id,
+                optionId: option?.id,
+              };
+              selectedVariations.push(variationData);
+            }
+          });
         }
       });
 
-      if (!radioOptionSelected) {
-        console.error('Please select at least one radio option');
-        toast.error('Please select at least one radio option');
-        return;
+      const formattedVariations = selectedVariations
+        .map((variation) => `{${variation.variationId},${variation.optionId}}`)
+        .join(' ');
+      const restaurantId = window.localStorage.getItem("menuResturantId");
+      const tableId = window.localStorage.getItem("menuTableId");
+      const requestBody = {
+        restaurantId: restaurantId,
+        tableId: tableId,
+        coupon: null,
+        cartItems: [
+          {
+            productId: products.id,
+            variations: `[${formattedVariations}]`,
+            quantity: quantity,
+            note: textareaValue,
+          },
+        ],
+      };
+
+      const response = await axios.post('http://192.168.1.121:3030/cart/new', requestBody);
+      if (response.status === 200) {
+        setIsChanged(!isChanged);
+        console.log('Item added to cart');
+        toast.success('Item added successfully!');
+      } else {
+        console.error(`Failed to add item to cart. Status: ${response.status}`);
+        toast.error('Something went wrong');
       }
+
+      console.log("Selected Variations (formatted array):", `[${formattedVariations}]`);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
     }
+  };
 
-    // Handle checkbox options
-    variations?.forEach((variation) => {
-      if (variation.type === "multi") {
-        variation.VariationOptions.forEach((option) => {
-          if (selectedOptions[option?.id]) {
-            const variationData = {
-              variationId: variation?.id,
-              optionId: option?.id,
-            };
-            selectedVariations.push(variationData);
-          }
-        });
-      }
-    });
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
-    const formattedVariations = selectedVariations
-      .map((variation) => `{${variation.variationId},${variation.optionId}}`)
-      .join(' ');
-      const restaurantId=typeof window !== 'undefined' ?window.localStorage.getItem("menuResturantId"): null;
-      const tableId=typeof window !== 'undefined' ?window.localStorage.getItem("menuTableId"): null;
-    const requestBody = {
-      restaurantId: restaurantId,
-      tableId: tableId,
-      coupon: null,
-      cartItems: [
-        {
-          productId: products.id,
-          variations: `[${formattedVariations}]`, // Wrap formattedVariations in square brackets
-          quantity: quantity,
-          note: textareaValue,
-        },
-      ],
-    };
-
-    const response = await axios.post('http://192.168.1.121:3030/cart/new', requestBody);
-    
-    if (response.status === 200) {
-    
-      setIsChanged(!isChanged)
-
-
-      console.log('Item added to cart');
-      toast.success('Item added successfully!');
-
-
-    } else {
-      console.error(`Failed to add item to cart. Status: ${response.status}`);
-      toast.error('Something went wrong');
-    }
-
-    console.log("Selected Variations (formatted array):", `[${formattedVariations}]`);
-  } catch (error) {
-    console.error('Error adding item to cart:', error);
-  }
-};
-const [showFullDescription, setShowFullDescription] = useState(false);
-
-// Function to toggle between showing the full description and the truncated description
-
-const toggleDescription = () => {
-  setShowFullDescription(!showFullDescription);
-};
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
 
   return (
     <div className="">
-      
-      <Hero products={products} />
+    {/* slider for single product */}
+      { /*<Hero products={products} /> */ }
+      <div className="image-container" >
+        {/* Assuming the image URL is dynamic and you get it from products */}
+        {products && products.img && (
+          <Image
+            src={products.img} // Replace with the actual property containing the image URL
+            alt={products.name}
+            width={800}
+            height={400}
+            style={{width:'100%'}}
+          />
+        )}
+      </div>
       <br />
       <hr />
       <div className='container'>
@@ -221,52 +200,48 @@ const toggleDescription = () => {
             <br />
             <b>{calculateTotal()} JOD</b>
           </div>
-         <Link href='https://vodira.com/'> <Image width={50} src={AR} alt="AR"/></Link>
+          <Link href='https://vodira.com/'> <Image width={50} src={AR} alt="AR"/></Link>
           <div className="counter">
-          <span style={{ display: 'flex', alignItems: 'center'}}  className="cursor" onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>-</span>
-          <input
-          className="custom-input"
-          type="number"
-          value={quantity}
-          onChange={(e) => {
-            const value = parseInt(e.target.value);
-            if (!isNaN(value)) {
-              setQuantity(value);
-            }
-          }}
-          step={1}
-          onKeyPress={(e) => {
-            if (e.key === '0') {
-              const currentValue = parseInt(e.target.value);
-              if (isNaN(currentValue) || currentValue !== 0) {
-                return; // Allow zero (0) only if no other digits are entered or the value is non-zero
-              }
-              e.preventDefault(); // Prevent the input of zero (0)
-            }
-          }}
-        />
-          <span style={{ display: 'flex', alignItems: 'center'}} className="cursor" onClick={() => setQuantity((prev) => ( prev + 1 ))}>+</span>
+            <span style={{ display: 'flex', alignItems: 'center'}}  className="cursor" onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>-</span>
+            <input
+              className="custom-input"
+              type="number"
+              value={quantity}
+              onChange={() => {}}
+              onKeyDown={(e) => e.preventDefault()}
+              step={1}
+              onKeyPress={(e) => {
+                if (e.key === '0') {
+                  const currentValue = parseInt(e.target.value);
+                  if (isNaN(currentValue) || currentValue !== 0) {
+                    return;
+                  }
+                  e.preventDefault();
+                }
+              }}
+            />
+            <span style={{ display: 'flex', alignItems: 'center'}} className="cursor" onClick={() => setQuantity((prev) => ( prev + 1 ))}>+</span>
           </div>
         </div>
         <div>
           <br />
           <div className="desc container">
-          {showFullDescription ? (
-            products?.description
-          ) : (
-            <>
-              {products?.description.slice(0, 100)}
-              {products?.description.length > 100 && (
-                <span
-                  style={{ cursor: 'pointer', color: 'blue' }}
-                  onClick={toggleDescription}
-                >
-                  {showFullDescription ? 'See Less' : 'See More'}
-                </span>
-              )}
-            </>
-          )}
-        </div>
+            {showFullDescription ? (
+              products?.description
+            ) : (
+              <>
+                {products?.description.slice(0, 100)}
+                {products?.description.length > 100 && (
+                  <span
+                    style={{ cursor: 'pointer', color: 'blue' }}
+                    onClick={toggleDescription}
+                  >
+                    {showFullDescription ? 'See Less' : 'See More'}
+                  </span>
+                )}
+              </>
+            )}
+          </div>
         </div>
         <section className="sizeAndExtras">
           <br />
@@ -289,10 +264,10 @@ const toggleDescription = () => {
                         <span>{option.name}</span>
                         <div className="radioContainer">
                           <input
-                          required 
+                            required
                             type="radio"
-                            name="price"
-                            value={option.price}
+                            name={variation.title}
+                            value={option.id}
                             onChange={() => handleRadioChange(variation?.title, option)}
                             checked={selectedOptions[variation?.title]?.id === option.id}
                           />
@@ -327,29 +302,25 @@ const toggleDescription = () => {
               </div>
             ))}
           </form>
-          
           <br />
-         
-         
           <div className="requestsContainer">
             <div>
-            <span><BiMessageDetail style={{ fontSize: '20px' }} /></span>
-            <span>Any Special requests</span>
+              <span><BiMessageDetail style={{ fontSize: '20px' }} /></span>
+              <span>Any Special requests</span>
             </div>
-            <span    className="addNotes" onClick={toggleTextarea}>Add note</span>
-                  </div>
+            <span className="addNotes" onClick={toggleTextarea}>Add note</span>
+          </div>
           <br />
           <div>
             <textarea
-            onChange={handleTextareaChange}
-            rows={4}
+              onChange={handleTextareaChange}
+              rows={4}
               style={{ display: isTextareaVisible ? 'block' : 'none', width: '100%', marginLeft: '10px', borderRadius:'5px ', border:'1px solid gray' }}
               placeholder="Enter your note here..."
             />
           </div>
           <div className="arAndCart">
             <span onClick={handleAddToCart} className="addTCartBTN"><AiOutlineShoppingCart />ADD TO CART</span>
-            
           </div>
         </section>
       </div>

@@ -15,8 +15,8 @@ function GetResturantInfo() {
 
     {/* Reason of this names is to avoid conflict with admin resturantId local storage value */}
     if (resturantId && tableId){
-      typeof window !== 'undefined' ? window.localStorage.setItem("menuResturantId",resturantId): null;
-      typeof window !== 'undefined' ?window.localStorage.setItem("menuTableId",tableId): null;
+      window.localStorage.setItem("menuResturantId",resturantId)
+      window.localStorage.setItem("menuTableId",tableId)
     }
 
 

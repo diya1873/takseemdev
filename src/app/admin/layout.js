@@ -1,4 +1,3 @@
-
 import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
@@ -17,7 +16,6 @@ import {
 
 import "react-toastify/dist/ReactToastify.css";
 import Head from 'next/head';
-import { OwnerSideBarProvider } from "../../components/context/ownersidebar";
 
 export const metadata = {
   title: "Takseem dashboard",
@@ -26,19 +24,20 @@ export const metadata = {
     images: 'https://photos.sphereshowcase.com/tBJczsgyzUAP3woETDr31.jpg',
   },
 };
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function AdminRootLayout({ children }) {
   return (
     <>
-  
-  <html lang="en">
-    <OwnerSideBarProvider>
+    <Head>
+<link rel="icon" type="image/png" href="https://media.istockphoto.com/id/1419410282/photo/silent-forest-in-spring-with-beautiful-bright-sun-rays.jpg?s=2048x2048&w=is&k=20&c=t9_zg20wVbrBoGn0tw__1fFq4ykeKs15TQQ3x-ehVC0=" />
+<title>Takseem dashboard</title>
+<meta name="description" content="RAM" />
+</Head>
+    <html lang="en">
       <SideBarProvider>
-      <body className={`${inter.className}  `}>
-          
-      <AppHeader />   
+        <body className="adminRoute p-0 m-0">
+          <AppHeader />
           <ToastContainer />
           <di className="d-flex p-0 m-0">
             <div className="d-flex">
@@ -50,8 +49,7 @@ export default async function AdminRootLayout({ children }) {
           <ResturantFooter />
         </body>
       </SideBarProvider>
-      </OwnerSideBarProvider>
-   </html>
+    </html>
     </>
   );
 }

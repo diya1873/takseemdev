@@ -14,7 +14,7 @@ const OrderTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+        const token = localStorage.getItem('token');
 
         if (!token) {
           setError('Authentication token not found in local storage');
@@ -77,7 +77,7 @@ const OrderTable = () => {
 
   const handleChangeStatus = async (newStatusValue) => {
     try {
-      const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+      const token = localStorage.getItem('token');
 
       if (!token) {
         setError('Authentication token not found in local storage');
@@ -213,7 +213,7 @@ const OrderModal = ({ order, onClose, onStatusChange }) => {
 
   const fetchOrderItems = async (orderId) => {
     try {
-      const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+      const token = localStorage.getItem('token');
 
       if (!token) {
         setItemsError('Authentication token not found in local storage');

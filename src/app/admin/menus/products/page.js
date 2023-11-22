@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import product from './products.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -29,7 +30,7 @@ function App() {
   };
 
   useEffect(() => {
-    const restaurantId =  typeof window !== 'undefined' ?localStorage.getItem('restaurantId'): null;
+    const restaurantId = localStorage.getItem('restaurantId');
     fetch(`http://192.168.1.121:3030/product/bulk/${restaurantId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -76,7 +77,7 @@ function App() {
     setShowDeleteModal(false);
 
     // Get the token from local storage
-    const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+    const token = localStorage.getItem('token');
 
     // Make the POST request with the token in the header
     fetch(`http://192.168.1.121:3030/product/delete/${selectedProductId}`, {
@@ -158,7 +159,7 @@ function App() {
 
       {selectedCategory && selectedCategory.name !== 'All' && <h2>{selectedCategory.name}</h2>}
 
-      <div className="product-table-container">
+      <div className="product-table-container ">
         <table className="product-table">
           <thead>
             <tr>
@@ -173,7 +174,15 @@ function App() {
             {products.map((product) => (
               <tr key={product.id}>
                 <td>
-                  <img src={product.img} alt={product.name} style={{ minWidth: '80px', maxHeight: '80px' }} />
+                <Image
+                src={`/${product.img}`}
+                alt={product.name}
+                width={80}
+                height={80}
+                layout="responsive"
+                objectFit="cover"
+                objectPosition="center"
+              />
                 </td>
                 <td>{product.name}</td>
                 <td>{truncateDescription(product.description, 10)}</td>

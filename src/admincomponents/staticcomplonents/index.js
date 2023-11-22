@@ -1,4 +1,3 @@
-"use client"
 import AppBreadcrumb from './AppBreadcrumb'
 
 import AppFooter from './AppFooter'

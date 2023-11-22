@@ -14,6 +14,8 @@ import {
 } from 'react-bootstrap';
 import './Addproduct.css';
 import Dropzone from 'react-dropzone';
+import Image from 'next/image';
+import css from './addproduct.css'
 
 function AddProductForm() {
   const [product, setProduct] = useState({
@@ -31,7 +33,7 @@ function AddProductForm() {
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
 
   useEffect(() => {
-    const restaurantId =  typeof window !== 'undefined' ?localStorage.getItem('restaurantId'): null;
+    const restaurantId = localStorage.getItem('restaurantId');
     // Fetch categories from the API
     axios
       .get(`http://192.168.1.121:3030/category/list/${restaurantId}`)
@@ -119,7 +121,7 @@ function AddProductForm() {
   }, [product.variants]);
 
   const handleSubmit = () => {
-    const token =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+    const token = localStorage.getItem('token');
     const formData = new FormData();
 
     formData.append('name', product.productName);
@@ -337,22 +339,28 @@ function AddProductForm() {
               <Dropzone onDrop={onDropMainImage}>
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()} className="dropzone-content">
-                    <input {...getInputProps()} />
-                    <p>Drag & drop or click to select a file</p>
-                    {product.mainImage && (
-                      <img
-                        className="innerimage"
-                        src={URL.createObjectURL(product.mainImage)}
-                        alt="Main Product"
-                      />
-                    )}
-                  </div>
+                  <input {...getInputProps()} />
+                  <p>Drag & drop or click to select a file</p>
+                  {product.mainImage && (
+                    <Image
+                      className="innerimage"
+                      src={URL.createObjectURL(product.mainImage)}
+                      alt="Main Product"
+                      width={100}
+                      height={100}
+                      // layout="responsive"
+                    />
+                  )}
+                </div>
                 )}
               </Dropzone>
             </div>
           </Form.Group>
 
-          <Form.Group>
+          {/* multi image  deleted */}
+{/* 
+
+   <Form.Group>
             <Form.Label className="form-label">Additional Images</Form.Label>
             <div className="dropzone">
               <Dropzone onDrop={onDropAdditionalImages} multiple>
@@ -363,20 +371,20 @@ function AddProductForm() {
                     <div className="preview">
                       {product.additionalImages.map((file, index) => (
                         <div key={index} className="image-preview">
-                          <img
-                            className="innerimage"
-                            src={URL.createObjectURL(
-                              new Blob([file.data], { type: 'image/jpeg' })
-                            )}
-                            alt={`Image ${index}`}
-                          />
-                          <button
-                            onClick={() => handleDeleteAdditionalImage(index)}
-                            className="delete-button"
-                          >
-                            x
-                          </button>
-                        </div>
+                        <Image
+                          className="innerimage"
+                          src={URL.createObjectURL(new Blob([file.data], { type: 'image/jpeg' }))}
+                          alt={`Image ${index}`}
+                          width={100}
+                          height={100}
+                        />
+                        <button
+                          onClick={() => handleDeleteAdditionalImage(index)}
+                          className="delete-button"
+                        >
+                          x
+                        </button>
+                      </div>
                       ))}
                     </div>
                   </div>
@@ -384,6 +392,9 @@ function AddProductForm() {
               </Dropzone>
             </div>
           </Form.Group>
+
+*/}
+       
         </Col>
 
         <Button variant="danger" onClick={handleSubmit}>

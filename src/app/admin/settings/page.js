@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import './page.css';
+import Image from 'next/image';
 
 const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
@@ -27,7 +28,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     // Get the restaurantId from local storage
-    const restaurantId =  typeof window !== 'undefined' ?window.localStorage.getItem('restaurantId'): null;
+    const restaurantId = window.localStorage.getItem('restaurantId');
 
     // Fetch restaurant data from the API
     axios
@@ -49,7 +50,7 @@ const ProfilePage = () => {
   }, []);
 
   const handleUpdate = async () => {
-    const token =  typeof window !== 'undefined' ?window.localStorage.getItem('token'): null;
+    const token = window.localStorage.getItem('token');
 
     const data = {
       name: dynamicName,
@@ -119,22 +120,30 @@ const ProfilePage = () => {
       <Row>
         <Col>
           <div className="cover-image">
-            <img
-              src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/0fe6bb94564795.5e82260252d18.jpg"
-              alt="Cover Image"
-            />
+          <Image
+          src="https://indiater.com/wp-content/uploads/2019/01/Free-Food-Facebook-Cover-990x357.jpg"
+          alt="Cover Image"
+          width={100}
+          height={100}
+          layout="responsive"
+          objectFit="cover" // Use "cover" for responsive layout
+          objectPosition="center" // Adjust as needed
+        />
           </div>
         </Col>
       </Row>
       <Row>
         <Col>
           <div className="circle-profile-image">
-            <img
-              src={
-                restaurantInfo?.circleImage ||'https://user-images.githubusercontent.com/5709133/50445980-88299a80-0912-11e9-962a-6fd92fd18027.png'
-              }
-              alt="Circle Profile Image"
-            />
+          <Image
+          src="https://user-images.githubusercontent.com/5709133/50445980-88299a80-0912-11e9-962a-6fd92fd18027.png"
+          alt="Cover Image"
+          width={100}
+          height={100}
+          layout="responsive"
+          objectFit="cover" // Use "cover" for responsive layout
+          objectPosition="center" // Adjust as needed
+        />
             <input
               type="file"
               name="circleImage"

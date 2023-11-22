@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // components/Sidebar.js
 import React, { useEffect, useState } from "react";
 import Link from "next/link";

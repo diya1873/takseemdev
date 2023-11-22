@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
 
-          
+
               <body className={`${inter.className} p-o m-0`} >
 
               

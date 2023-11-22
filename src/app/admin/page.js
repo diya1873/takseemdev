@@ -15,7 +15,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useSideBarContext } from "../../components/context/sidebar";
-import { useOwnerSideBarContext } from "../../components/context/ownersidebar";
 
 const Login = () => {
   const router = useRouter();
@@ -29,14 +28,6 @@ const Login = () => {
     setIsUserLogedIn,
     isUserLogedIn,
   } = useSideBarContext();
-  const {
-    isCollabsled2,
-    setIsCollabsled2,
-    isClosed2,
-    setIClosed2,
-    setIsUserLogedIn2,
-    isUserLogedIn2,
-  } = useOwnerSideBarContext();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -73,27 +64,14 @@ const Login = () => {
         }
       );
 
-
-      
-      // console.log("Response from server:", response.status);
-     
+      console.log("Response from server:", response.data);
+      console.log("Response from server:", response.status);
       if (response.status === 200) {
-     
         toast.success("successfully login");
-        typeof window !== 'undefined' ?window.localStorage.setItem("token", response.data.token): null;
-        typeof window !== 'undefined' ? window.localStorage.setItem("restaurantId", response.data.restaurantId): null;
-       
-
-        if(response.data.role==="owner"){
-          setIsUserLogedIn2(true)
-          setIClosed2(false)
-          router.push('/owner')
-           
-        } else{
-          setIsUserLogedIn(true)
-          setIClosed(false)
-          router.push("/admin/dashboard");
-        }
+        window.localStorage.setItem("token", response.data.token);
+        window.localStorage.setItem("restaurantId", response.data.restaurantId);
+        setIsUserLogedIn(true);
+        router.push("/admin/dashboard");
       } else {
         toast.error(response.data.error);
       }
@@ -133,7 +111,7 @@ const Login = () => {
                   />
                 </div>
                 <h1 className="text-center fw-bolder mt-5">Signin</h1>
-                <Form >
+                <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <InputGroup>
@@ -173,8 +151,8 @@ const Login = () => {
                   </Form.Group>
                   <Re />
                   <button
-                    onClick={handleSubmit}
-                    
+                    type="submit"
+                    disabled={password.length < 5}
                     className="w-100 btn loginbtn mt-4 "
                   >
                     Continue

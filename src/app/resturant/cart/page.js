@@ -62,8 +62,8 @@ const handlePlaceOrder=(cartId)=>{
     fetchCartData()
     setIsChanged(!isChanged);
 }
-const restaurantId=typeof window !== 'undefined' ?window.localStorage.getItem("menuResturantId"): null;
-const tableId=typeof window !== 'undefined' ?window.localStorage.getItem("menuTableId"): null;
+const restaurantId=window.localStorage.getItem("menuResturantId")
+const tableId=window.localStorage.getItem("menuTableId")
   const fetchCartData = async () => {
     try {
       const response = await axios.get(

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import './profile.css';
+import Image from 'next/image';
 
 const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState({
@@ -18,7 +19,7 @@ const ProfilePage = () => {
   const [resetError, setResetError] = useState('');
 
   useEffect(() => {
-    const userToken =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+    const userToken = localStorage.getItem('token');
     setToken(userToken);
 
     axios
@@ -34,7 +35,7 @@ const ProfilePage = () => {
 
   const handlePasswordReset = async () => {
 
-    const userToken =  typeof window !== 'undefined' ?localStorage.getItem('token'): null;
+    const userToken = localStorage.getItem('token');
     setToken(userToken);
     const data = {
       currentPassword: currentPassword,
@@ -68,14 +69,30 @@ const ProfilePage = () => {
       <Row>
         <Col>
           <div className="cover-image">
-            <img src="https://indiater.com/wp-content/uploads/2019/01/Free-Food-Facebook-Cover-990x357.jpg" alt="Cover Image" />
+          <Image
+          src="https://indiater.com/wp-content/uploads/2019/01/Free-Food-Facebook-Cover-990x357.jpg"
+          alt="Cover Image"
+          width={100}
+          height={100}
+          layout="responsive"
+          objectFit="cover" // Use "cover" for responsive layout
+          objectPosition="center" // Adjust as needed
+        />
           </div>
         </Col>
       </Row>
       <Row>
         <Col>
           <div className="circle-profile-image">
-            <img src="https://user-images.githubusercontent.com/5709133/50445980-88299a80-0912-11e9-962a-6fd92fd18027.png" alt="Circle Profile Image" />
+          <Image
+          src="https://user-images.githubusercontent.com/5709133/50445980-88299a80-0912-11e9-962a-6fd92fd18027.png"
+          alt="Cover Image"
+          width={100}
+          height={100}
+          layout="responsive"
+          objectFit="cover" // Use "cover" for responsive layout
+          objectPosition="center" // Adjust as needed
+        />
           </div>
         </Col>
       </Row>
