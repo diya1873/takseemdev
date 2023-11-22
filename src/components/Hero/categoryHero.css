@@ -1,0 +1,44 @@
+/* CategoryList.module.css */
+.category-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .category-item img {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .category-item .img {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .category-item p {
+    margin: 10px 0;
+  }
+  /* Custom styles for the prev and next arrows */
+.slick-prev, .slick-next {
+    background-color: #000000; /* Background color for the circles */
+  
+    border-radius: 50%; /* Make it a rounded circle */
+    font-size: 20px; /* Adjust the font size */
+    width: 20px; /* Adjust the width and height as needed */
+    height: 20px;
+  }
+  
+  .slick-prev:hover, .slick-next:hover {
+    background-color: #0057b3; /* Change the background color on hover */
+  }
+ 

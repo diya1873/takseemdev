@@ -1,0 +1,135 @@
+.navbar{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+}
+.getintochbtn {
+    display: inline-block;
+    padding: .75rem 1.25rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .getintochbtn:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#99080C;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  
+  .getintochbtn:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #f80000; 
+    transition: all .5s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  
+  .getintochbtn:hover {
+    color: #fff;
+  }
+  
+  .getintochbtn:hover:before {
+    width: 100%;
+  }
+  .newButton {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .newButton:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #99080C;
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  
+  .newButton:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #ff0008; /* Replace darken($color, 15%) with a specific color */
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  
+  .newButton:hover {
+    color: #fff;
+  }
+  
+  .newButton:hover:before {
+    width: 100%;
+  }
+  
+  /* Optional reset for presentation */
+  * {
+    font-family: Arial;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  .container {
+    padding-top: 50px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+  
+  h1 {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+    color: #777;
+  }
+  
+  span {
+    display: block;
+    /* margin-top: 2rem; */
+    font-size: 0.7rem;
+    color: #777;
+  }
+  
+  span a {
+    font-size: 0.7rem;
+    color: #999;
+    text-decoration: underline;
+  }
+  

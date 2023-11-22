@@ -1,0 +1,22 @@
+
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+
+class MyDocument extends Document {
+  render() {
+    return (
+      <Html>
+        <Head>
+          <meta property="og:image" content="https://your-domain.com/your-image.png" />
+          <meta name="twitter:image" content="https://your-domain.com/your-image.png" />
+          {/* Add other necessary metadata */}
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+
+export default MyDocument;

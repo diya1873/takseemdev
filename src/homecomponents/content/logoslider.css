@@ -1,0 +1,24 @@
+.sliderimg {
+    width: 100px;
+    height: 100px;
+    animation: scroll 30s linear infinite;
+  }
+  
+  .slide-track {
+    width: 100%;
+    display: flex;
+    gap: 7em;
+    overflow: hidden;
+  }
+  
+  .slider {
+    margin-top: 70px;
+    background-color: whitesmoke;
+    padding: 8em 2em;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(100%); } /* Start with a positive translation */
+    100% { transform: translateX(-900%); }
+  }
+  

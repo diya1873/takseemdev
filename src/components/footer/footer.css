@@ -1,0 +1,56 @@
+
+  .mainfooter{
+display: flex;
+margin-top: 5%;
+    justify-content: center;
+    padding: 5px;
+    position: sticky;
+    bottom: 2%;
+    
+    margin-left: 3%;
+    margin-right: 3%;
+
+    background-color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px#888888;
+   border: 1px solid rgba(0, 0, 0, 0.194);
+   
+   border-radius: 20px   20px  20px  20px;
+  }
+  .footer-item{
+   min-width: 20%;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    padding: 5px 16px;
+    border-radius: 50px;
+    text-align: center ;
+  }
+  
+ 
+  
+  .footer-item:focus{
+    text-decoration: none;
+    color: #99080C;
+    background-color: rgba(255, 255, 255, 0.2);
+    /* transition: .2s; */
+  }
+  
+  .footer-item:focus span{
+    width: 100%;
+    /* margin-left: 8px; */
+    transition: .2s;
+  }
+  
+  *:focus{
+    outline: none;
+    border: none;
+  }
+  /* Customize the color for your icons */
+.footer-item .h1 {
+    color: black; /* Set your desired color */
+  }
+  
+  /* Hover/focus styles for your icons */
+  .footer-item:focus .h1 {
+    color: #99080C; /* Set the color for focus/hover state */
+  }

@@ -1,0 +1,77 @@
+/* .card{
+    background:#edeef3 !important;
+    border-radius: 25px !important;
+  }
+  
+  .card-body{
+    text-align: center;
+  } */
+  
+  /* img{
+    min-height: 100px !important;
+  } */
+  
+
+
+/* DROP ZONE CATEGORY STYLE*/
+/* YourComponent.css */
+/* .dropzone {
+    cursor: pointer;
+    padding: 20px;
+    border: 2px dashed #cccccc;
+    border-radius: 4px;
+  }
+  
+  .upload-icon {
+    margin-bottom: 1rem;
+  }
+  
+  .image-preview {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .form-label {
+    float: left;
+    color: #a21a1a;
+  }
+  
+  .custom-input {
+    padding: 10px !important;
+    background-color: #ffffff !important;
+    border-bottom-left-radius: 41px !important;
+    border-bottom-right-radius: 41px !important;
+    border-top-left-radius: 41px !important;
+    border-top-right-radius: 0 !important;
+    box-shadow: 0 17px 40px 0 rgba(75, 128, 182, 0.07) !important;
+    border: 0 !important;
+    font-size: 17px !important;
+    color: #a7b4c1 !important;
+    transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out !important,    box-shadow 0.1s ease-in-out !important;
+    -webkit-transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out !important,    box-shadow 0.1s ease-in-out !important;
+    -moz-transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out !important,    box-shadow 0.1s ease-in-out !important;
+    -ms-transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out !important,    box-shadow 0.1s ease-in-out !important;
+    -o-transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out !important,    box-shadow 0.1s ease-in-out !important;
+  }
+  .custom-input:hover {
+    box-shadow: 0 14px 44px 0 rgba(0, 0, 0, 0.077) !important;
+  }
+   */
+  .submit-button {
+    background: #a21a1a !important;
+    /* Add your submit button styles here */
+  }
+  
+  .card {
+    background: #edeef32e !important;
+  }
+  
+  
+  
+
+
+  .card-img-top{
+    min-height: 200px !important;
+    max-height: 200px !important;
+   
+  }

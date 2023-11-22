@@ -1,0 +1,75 @@
+.signupPage{
+    min-height: 100vh;
+}
+/* styles/globals.css */
+.app {
+    display: flex;
+  }
+  
+ .login-page {
+  min-height: 60vh;
+  background-color: #23324341
+ }
+ .background-image2 {
+  background-image: url("../../../../public/images/signup.png");
+  min-height: 80%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top:  3% 3% 3% 0px;
+}
+
+/* Hide the background image on screens with a maximum width of 768px (adjust the value as needed) */
+@media (max-width: 900px) {
+  .background-image {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .imgcol {
+    display: none;
+  }
+}
+ .rightcol{
+  border-radius: 5px;
+ }
+ .mainrow{
+
+  margin: 5%;
+  min-height: 600px;
+ 
+ }
+ .loginform{
+  padding:5%;
+  border-radius: 0px 85px 55px 0px;
+  background-color: white;
+ }
+ .loginbtn{
+  height: 60px;
+  color: white;
+  background-color: #99080C;
+ }
+ .loginbtn:hover{
+  color: white;
+  height: 60px;
+  background-color: #99080dbb;
+ }
+
+
+ .donThave{
+  font-size: 16px;
+}
+
+/* Media query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+  .donThave {
+    font-size: 14px; /* Adjust the font size for smaller screens */
+  }
+}
+
+/* Media query for screens with a maximum width of 576px */
+@media (max-width: 576px) {
+  .donThave {
+    font-size: 12px; /* Adjust the font size for even smaller screens */
+  }
+}
+

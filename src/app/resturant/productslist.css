@@ -1,0 +1,11 @@
+.viewbtn{
+max-width: 100px;
+
+
+}.productcard{
+    max-height: 200px;
+    overflow-y: hidden;
+}
+.namerow{
+    position: relative;
+}

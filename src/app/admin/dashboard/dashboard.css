@@ -1,0 +1,165 @@
+
+
+.main{
+    min-height: 100vh;
+}
+
+
+.dashboard-card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.dashboard-card:hover {
+  transform: scale(1.02);
+}
+
+/* Card-specific styling */
+.sales-card {
+  background-color: #3498db !important;
+  color: #fff;
+}
+
+.visitor-card {
+  background-color: #e74c3c !important;
+  color: #fff;
+}
+
+.orders-card {
+  background-color: #2ecc71 !important;
+  color: #fff;
+}
+
+/* Animation styles */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animated {
+  animation: pulse 4s infinite;
+}
+
+
+
+/* Add this CSS to your Dashboard.css file or create a separate CSS file */
+.product-card {
+  margin: 10px;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card .card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.product-card .product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.product-card .product-info p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.product-card img {
+  max-height: 220px;
+}
+
+/* Styling the "Today Most Orders" title */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Add this CSS to your Dashboard.css file or create a separate CSS file */
+
+/* Product Cards */
+.product-card {
+  margin: 10px;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card .card-title {
+  font-size: 20px; /* Larger font size */
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333; /* Text color */
+  text-align: center; /* Center the title */
+}
+
+.product-card .product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.product-card .product-info p {
+  margin: 0;
+  font-size: 18px; /* Larger font size for product info */
+  color: #666; /* Text color */
+}
+
+.product-card img {
+  max-height: 220px;
+}
+
+/* "Today Most Orders" title */
+h2 {
+  font-size: 28px; /* Larger font size */
+  font-weight: bold;
+  margin: 20px 0;
+  color: #333; /* Text color */
+  text-align: center; /* Center the title */
+}
+
+/* Custom styling for specific cards if needed */
+.product-card:nth-child(odd) {
+  background-color: #f9f9f9; /* Alternating background color */
+}
+
+.price{
+  color:#2ecc71 !important
+}
+
+.orders{
+  color:#e74c3c !important; 
+}
+
+.header-row {
+  background-color: red !important;
+  color: white !important;
+}
+
+.main{
+    min-height: 100vh;
+}

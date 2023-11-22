@@ -1,0 +1,123 @@
+
+
+.form {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .variant-form {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    width: 50%; /* Make it full width */
+  }
+  
+  .option-form {
+    border: 1px solid #eee;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: #f6f6f6;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .variant-form:last-child {
+    margin-bottom: 0;
+    
+  }
+  
+  .bordered {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+  }
+  
+
+
+  /* Style for the dropzones */
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropzone-content {
+  text-align: center;
+}
+
+/* Style for the image previews */
+.image-preview {
+  
+  margin-top: 10px;
+  width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.additional-image-preview {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Style for the delete button on additional images */
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+}
+
+/* Style for the category dropdown */
+#category .dropdown-toggle {
+  width: 100%;
+  text-align: left;
+}
+
+.innerimage{
+width: 200px;
+height: 200px;
+border-radius: 50%;
+display: flex;
+justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+

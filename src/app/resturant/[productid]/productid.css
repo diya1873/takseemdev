@@ -1,0 +1,171 @@
+.productnamesection{
+    display: flex;
+     justify-content: space-between ;
+      align-items: center;
+}
+
+.counter{
+    width: 120px;
+     display: flex;
+     justify-content: space-between;
+      border: 1px solid gray ;
+       border-radius: 10px;
+        padding: 10px;
+}
+.counterbtn{
+    cursor: pointer;
+}
+
+.sizeAndExtras{
+    /* overflow-y: scroll;  */
+    /* height: 400px; */
+     padding: 10px;
+}
+.productSizeAndName{
+    display: flex;
+     justify-content: space-between;
+      align-items: center;
+       text-align: center;
+}
+
+.requiredParent{
+    width: 120px;
+     border: 1px solid gray ;
+      border-radius: 10px;
+       padding: 10px;
+        text-align: center;
+}
+
+.requiredText{
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    
+    flex-direction: column;
+}
+
+.label{
+    display: flex;
+     justify-content: space-between;
+}
+
+.radioContainer{
+    display: flex;
+    gap: 10px;
+     justify-content: space-between;
+     flex-direction: row-reverse;
+}
+.checkContainer{
+    display: flex;
+    gap: 10px;
+     justify-content: space-between;
+     flex-direction: row-reverse;
+}
+
+.extraContainer{
+    display: flex;
+     justify-content: space-between;
+      align-items: center;
+       text-align: center;
+}
+.extrasText{
+    float:left;
+}
+
+
+.requestsContainer{
+    display: flex;
+     justify-content: space-between;
+}
+
+.addNotes{
+    cursor: pointer;
+     color: orange;
+}
+
+.arAndCart{
+    display: flex ;
+     justify-content: center;
+     align-items:center;
+}
+
+.AR{
+    border:3px dotted red;
+     padding:5px;
+      border-radius:50%;
+}
+
+.addTCartBTN{
+    border:1px solid rgb(0, 0, 0);
+     padding:10px;
+      border-radius:30px;
+       display:flex;
+       justify-content:space-around;
+        align-items:'center';
+        width:250px;
+        cursor:pointer;
+        align-items: center;
+        margin-top: 30px;
+        background: black;
+        color: white;
+        font-size: 20px;
+}
+
+.addTCartBTN:hover{
+    border:1px solid rgb(0, 0, 0);
+     padding:10px;
+     
+       display:flex;
+       justify-content:space-around;
+        align-items:'center';
+        width:250px;
+        cursor:pointer;
+        align-items: center;
+        margin-top: 30px;
+        background: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+     
+}
+
+.inputcounter{
+    width: 63px;
+     border: none;
+     text-align:center;
+    appearance:unset;
+    outline: none;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+/* Remove the spinner controls (up and down arrows) */
+.custom-input::-webkit-inner-spin-button,
+.custom-input::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin: 0;
+}
+
+.custom-input {
+    width: 63px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    border: none;
+    text-align: center;
+  }
+  
+
+  .productnamesection > div{
+    font-size: 14px !important;
+  }
+
+  /* .desc{
+    font-size: 13px !important;
+  } */
+
+
+  

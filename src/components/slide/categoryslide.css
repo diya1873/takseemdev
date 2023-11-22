@@ -1,0 +1,24 @@
+/* CategoryList.module.css */
+.category-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+ 
+  .category-item img {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .category-item .img {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .category-item p {
+    margin: 10px 0;
+  }
+ 

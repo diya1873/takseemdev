@@ -1,0 +1,38 @@
+/* styles.css */
+
+.product-table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-table th, .product-table td {
+    padding: 10px;
+    text-align: left;
+    white-space: nowrap;
+    border: none; /* Remove borders */
+  }
+  
+  .product-table img {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  /* Add media query for mobile responsiveness */
+  @media (max-width: 768px) {
+    .product-table th, .product-table td {
+      font-size: 14px;
+    }
+    .product-table img {
+      max-width: 50px;
+    }
+  }
+  
+  
+  .inputsearch{
+    width: 300px !important;
+  }
