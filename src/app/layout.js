@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Takseem",
   description: "RAM"
-  
+   
   
 };
 
